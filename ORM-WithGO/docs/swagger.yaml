@@ -1,0 +1,58 @@
+basePath: /
+definitions:
+  main.Item:
+    properties:
+      description:
+        type: string
+      itemCode:
+        type: string
+      lineItemId:
+        description: gorm Model
+        type: integer
+      quantity:
+        type: integer
+    type: object
+  main.Order:
+    properties:
+      customerName:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/main.Item'
+        type: array
+      orderId:
+        type: integer
+      orderedAt:
+        type: string
+    type: object
+host: localhost:8082
+info:
+  contact:
+    email: soberkoder@swagger.io
+    name: API Support
+  description: This is a sample serice for managing orders
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: items API
+  version: "1.0"
+paths:
+  /orders:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all orders
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/main.Order'
+            type: array
+      summary: Get details of all orders
+      tags:
+      - orders
+swagger: "2.0"
